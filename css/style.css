@@ -83,21 +83,15 @@ nav.scrolled {
   display: flex; gap: 3rem; list-style: none; align-items: center;
 }
 
-/* All nav links share these base styles */
-.nav-links a,
-.nav-fleet-trigger {
+.nav-links a {
   color: var(--muted); text-decoration: none;
   font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
   font-weight: 400; font-family: 'Montserrat', sans-serif;
   transition: color 0.3s ease;
-  background: none; border: none; padding: 0; cursor: pointer;
 }
 .nav-links a:hover,
-.nav-links a.active,
-.nav-fleet-trigger:hover,
-.nav-fleet-trigger:focus-visible {
+.nav-links a.active {
   color: var(--gold);
-  outline: none;
 }
 
 /* CTA button in nav */
@@ -113,133 +107,6 @@ nav.scrolled {
   border-color: var(--gold) !important;
   color: var(--gold-light) !important;
 }
-
-/* =============================================
-   FLEET DROPDOWN
-   ============================================= */
-
-.nav-item-fleet {
-  position: relative;
-  list-style: none;
-}
-
-.nav-fleet-trigger {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.nav-chevron {
-  display: inline-block;
-  font-size: 0.75rem;
-  line-height: 1;
-  margin-top: 1px;
-  transition: transform 0.22s ease;
-  transform: scaleX(1.4);
-}
-.nav-item-fleet.is-open .nav-chevron {
-  transform: scaleX(1.4) rotate(180deg);
-}
-
-/*
-  DROPDOWN PANEL — display:none is the true ground state.
-  No visibility trick, no transition ambiguity on page load.
-  JS exclusively controls open/close via .is-open and .is-visible.
-  No CSS pseudo-class (:hover, :focus, :focus-within) opens this panel.
-*/
-.nav-dropdown {
-  display: none;          /* HARD HIDDEN — no paint, no layout, no flicker */
-  position: absolute;
-  top: calc(100% + 1.2rem);
-  left: 50%;
-  width: 540px;
-  z-index: 500;
-  transform: translateX(-50%) translateY(-6px);
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: none;
-}
-
-/* Step 1: JS adds .is-open → display:block (still transparent) */
-.nav-item-fleet.is-open > .nav-dropdown {
-  display: block;
-  pointer-events: auto;
-}
-
-/* Step 2: JS adds .is-visible one rAF later → fade + slide in */
-.nav-item-fleet.is-open > .nav-dropdown.is-visible {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* Hover-bridge fills gap between trigger and panel */
-.nav-dropdown::before {
-  content: '';
-  position: absolute;
-  top: -1.2rem;
-  left: 0; right: 0;
-  height: 1.2rem;
-}
-
-.nav-dropdown-inner {
-  background: rgba(6,9,16,0.98);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  padding: 1.25rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-}
-
-.nav-dropdown-vessel {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1rem;
-  text-decoration: none;
-  border: 1px solid transparent;
-  background: transparent;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-.nav-dropdown-vessel:hover {
-  background: rgba(201,169,110,0.06);
-  border-color: var(--border);
-}
-.ndv-img {
-  width: 100%;
-  height: 75px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.ndv-info { display: flex; flex-direction: column; gap: 0.2rem; }
-.ndv-type {
-  font-size: 0.52rem; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--gold-dark); font-weight: 400;
-}
-.ndv-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem; font-weight: 300; color: var(--white);
-}
-.ndv-spec {
-  font-size: 0.6rem; letter-spacing: 0.08em; color: var(--muted);
-}
-
-.nav-dropdown-footer {
-  grid-column: 1 / -1;
-  padding: 0.75rem 1rem 0;
-  margin-top: 0.75rem;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: flex-end;
-}
-.nav-dropdown-all {
-  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold); text-decoration: none; font-weight: 400;
-  transition: color 0.2s ease;
-}
-.nav-dropdown-all:hover { color: var(--gold-light); }
 
 /* =============================================
    HAMBURGER BUTTON
@@ -288,45 +155,6 @@ nav.scrolled {
   color: var(--gold); border: 1px solid var(--border);
   padding: 0.8rem 2.5rem; margin-top: 0.5rem;
 }
-
-/* Mobile fleet accordion toggle */
-.nav-mobile-fleet-toggle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem; font-weight: 300; color: var(--white);
-  background: none; border: none; cursor: pointer;
-  display: flex; align-items: center; gap: 0.4rem;
-  transition: color 0.3s ease; padding: 0;
-  letter-spacing: 0.05em;
-}
-.nav-mobile-fleet-toggle:hover { color: var(--gold-light); }
-
-.nav-mobile-chevron {
-  font-size: 1.2rem; display: inline-block;
-  transition: transform 0.25s ease;
-  transform: scaleX(1.4);
-}
-.nav-mobile-fleet-toggle[aria-expanded="true"] .nav-mobile-chevron {
-  transform: scaleX(1.4) rotate(180deg);
-}
-
-/* Mobile fleet sub-links — hidden by default via max-height */
-.nav-mobile-fleet-sub {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 0.6rem; width: 100%;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.35s ease;
-}
-.nav-mobile-fleet-sub.open {
-  max-height: 300px;
-}
-.nav-mobile-fleet-sub a {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none;
-  transition: color 0.3s ease;
-}
-.nav-mobile-fleet-sub a:hover { color: var(--gold); }
 
 /* =============================================
    TYPOGRAPHY
