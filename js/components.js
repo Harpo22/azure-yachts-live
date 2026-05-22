@@ -9,12 +9,10 @@
   const inPages = window.location.pathname.includes('/pages/');
   const root    = inPages ? '../' : './';
 
-  /* ---- Current page for active nav ---- */
+  /* ---- Current page highlight (non-fleet links only) ---- */
   const path = window.location.pathname.split('/').pop() || 'index.html';
-
   function isActive(page) {
-    if (page === 'index.html' && (path === 'index.html' || path === '')) return 'active';
-    if (page !== 'index.html' && path === page) return 'active';
+    if (page === 'enquiry.html' && path === 'enquiry.html') return 'active';
     return '';
   }
 
@@ -22,40 +20,41 @@
   const navHTML = `
 <nav id="navbar">
   <a href="${root}index.html" class="nav-logo">Azure</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
 
     <li class="nav-item-fleet" id="navFleetItem">
-      <a href="${root}index.html#fleet"
-         class="nav-fleet-trigger ${isActive('index.html')}"
-         id="navFleetTrigger"
-         aria-haspopup="true"
-         aria-expanded="false">
+      <button
+        class="nav-fleet-trigger"
+        id="navFleetTrigger"
+        aria-haspopup="true"
+        aria-expanded="false"
+        type="button">
         Fleet <span class="nav-chevron" aria-hidden="true">&#8964;</span>
-      </a>
-      <div class="nav-dropdown" id="navFleetDropdown" role="region" aria-label="Fleet menu">
+      </button>
+      <div class="nav-dropdown" id="navFleetDropdown" aria-hidden="true">
         <div class="nav-dropdown-inner">
-          <a href="${root}pages/enquiry.html?vessel=S%C3%A9raphine" class="nav-dropdown-vessel">
-            <div class="ndv-img" style="background-image:url('https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=300&q=70')" role="img" aria-label="Séraphine"></div>
+          <a href="${root}pages/enquiry.html?vessel=Seraphine" class="nav-dropdown-vessel">
+            <div class="ndv-img" style="background-image:url('https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=300&q=70')"></div>
             <div class="ndv-info">
               <span class="ndv-type">Superyacht</span>
-              <span class="ndv-name">Séraphine</span>
-              <span class="ndv-spec">65 m &nbsp;·&nbsp; 12 guests</span>
+              <span class="ndv-name">S&eacute;raphine</span>
+              <span class="ndv-spec">65 m &middot; 12 guests</span>
             </div>
           </a>
           <a href="${root}pages/enquiry.html?vessel=Elara" class="nav-dropdown-vessel">
-            <div class="ndv-img" style="background-image:url('https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=300&q=70')" role="img" aria-label="Elara"></div>
+            <div class="ndv-img" style="background-image:url('https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=300&q=70')"></div>
             <div class="ndv-info">
               <span class="ndv-type">Motor Yacht</span>
               <span class="ndv-name">Elara</span>
-              <span class="ndv-spec">42 m &nbsp;·&nbsp; 10 guests</span>
+              <span class="ndv-spec">42 m &middot; 10 guests</span>
             </div>
           </a>
           <a href="${root}pages/enquiry.html?vessel=Solano" class="nav-dropdown-vessel">
-            <div class="ndv-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-92ab472cad5d?w=300&q=70')" role="img" aria-label="Solano"></div>
+            <div class="ndv-img" style="background-image:url('https://images.unsplash.com/photo-1544551763-92ab472cad5d?w=300&q=70')"></div>
             <div class="ndv-info">
               <span class="ndv-type">Classic Sailing</span>
               <span class="ndv-name">Solano</span>
-              <span class="ndv-spec">38 m &nbsp;·&nbsp; 8 guests</span>
+              <span class="ndv-spec">38 m &middot; 8 guests</span>
             </div>
           </a>
           <div class="nav-dropdown-footer">
@@ -70,22 +69,25 @@
     <li><a href="${root}pages/enquiry.html" class="${isActive('enquiry.html')}">Charter</a></li>
     <li><a href="${root}pages/enquiry.html" class="nav-cta">Private Charter</a></li>
   </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false" type="button">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<div class="nav-mobile" id="navMobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+<div class="nav-mobile" id="navMobile" aria-hidden="true">
   <a href="${root}index.html">Home</a>
-  <button class="nav-mobile-fleet-toggle" id="navMobileFleetToggle" aria-expanded="false">
+
+  <button class="nav-mobile-fleet-toggle" id="navMobileFleetToggle" aria-expanded="false" type="button">
     Fleet <span class="nav-mobile-chevron" aria-hidden="true">&#8964;</span>
   </button>
-  <div class="nav-mobile-fleet-sub" id="navMobileFleetSub" aria-hidden="true">
-    <a href="${root}pages/enquiry.html?vessel=S%C3%A9raphine">Séraphine — 65m</a>
-    <a href="${root}pages/enquiry.html?vessel=Elara">Elara — 42m</a>
-    <a href="${root}pages/enquiry.html?vessel=Solano">Solano — 38m</a>
+  <div class="nav-mobile-fleet-sub" id="navMobileFleetSub">
+    <a href="${root}pages/enquiry.html?vessel=Seraphine">S&eacute;raphine &mdash; 65m</a>
+    <a href="${root}pages/enquiry.html?vessel=Elara">Elara &mdash; 42m</a>
+    <a href="${root}pages/enquiry.html?vessel=Solano">Solano &mdash; 38m</a>
     <a href="${root}index.html#fleet">All Vessels</a>
   </div>
+
   <a href="${root}index.html#destinations">Destinations</a>
   <a href="${root}index.html#experience">Experience</a>
   <a href="${root}index.html#about">About</a>
@@ -133,7 +135,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2025 Azure Yachts. All rights reserved. Monaco.</span>
+    <span class="footer-copy">&copy; 2025 Azure Yachts. All rights reserved. Monaco.</span>
     <div class="footer-social">
       <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
@@ -143,7 +145,7 @@
 </footer>
 `;
 
-  /* ---- Inject ---- */
+  /* ---- Inject synchronously — elements exist immediately after these lines ---- */
   document.body.insertAdjacentHTML('afterbegin', navHTML);
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 
