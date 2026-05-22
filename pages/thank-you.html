@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enquiry Received | Azure Yachts</title>
+  <meta name="description" content="Thank you for your charter enquiry. An Azure Yachts consultant will be in touch within two hours.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .ty-wrap {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 4rem 2rem; position: relative; overflow: hidden;
+    }
+    .ty-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(rgba(6,9,16,0.8), rgba(6,9,16,0.8)),
+        url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1600&q=80') center/cover;
+      z-index: 0;
+    }
+    .ty-content { position: relative; z-index: 1; max-width: 600px; }
+    .ty-icon {
+      width: 70px; height: 70px; border: 1px solid var(--gold);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2.5rem; font-size: 1.6rem; color: var(--gold);
+      animation: fadeUp 1s ease forwards; opacity: 0;
+    }
+    .ty-tag {
+      font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 1.5rem;
+      animation: fadeUp 1s ease 0.15s forwards; opacity: 0;
+    }
+    .ty-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 300; color: var(--white);
+      line-height: 1; margin-bottom: 1rem;
+      animation: fadeUp 1s ease 0.25s forwards; opacity: 0;
+    }
+    .ty-title em { font-style: italic; color: var(--gold-light); display: block; }
+    .ty-body {
+      font-size: 0.85rem; line-height: 1.9; color: var(--muted);
+      margin: 1.5rem auto 3rem; max-width: 440px;
+      animation: fadeUp 1s ease 0.4s forwards; opacity: 0;
+    }
+    .ty-actions {
+      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 1s ease 0.55s forwards; opacity: 0;
+    }
+    .ty-divider {
+      width: 1px; height: 60px; background: var(--border); margin: 3rem auto;
+      animation: fadeUp 1s ease 0.7s forwards; opacity: 0;
+    }
+    .ty-contact {
+      animation: fadeUp 1s ease 0.8s forwards; opacity: 0;
+    }
+    .ty-contact p { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.5rem; }
+    .ty-contact a {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+      color: var(--gold-light); text-decoration: none; transition: color 0.3s;
+    }
+    .ty-contact a:hover { color: var(--gold); }
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(20px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<script src="../js/components.js"></script>
+<script src="../js/main.js"></script>
+
+<main class="ty-wrap">
+  <div class="ty-bg" role="img" aria-label="Aerial view of yacht in calm waters"></div>
+  <div class="ty-content">
+    <div class="ty-icon" aria-hidden="true">&#10003;</div>
+    <span class="ty-tag">Enquiry Received</span>
+    <h1 class="ty-title">Thank <em>You</em></h1>
+    <p class="ty-body">
+      Your charter enquiry has been received. A senior Azure Yachts consultant will be in touch within two hours to begin crafting your voyage. We look forward to speaking with you.
+    </p>
+    <div class="ty-actions">
+      <a href="../index.html" class="btn-primary">Return Home</a>
+      <a href="enquiry.html" class="btn-ghost">New Enquiry</a>
+    </div>
+    <div class="ty-divider" aria-hidden="true"></div>
+    <div class="ty-contact">
+      <p>Or reach us directly</p>
+      <a href="mailto:charter@azureyachts.com">charter@azureyachts.com</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>

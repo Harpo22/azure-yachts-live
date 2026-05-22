@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Charter Enquiry | Azure Yachts — Private Yacht Charter Monaco</title>
+  <meta name="description" content="Submit a private yacht charter enquiry with Azure Yachts. Choose your vessel, destination and dates. Our consultants respond within 2 hours.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://azureyachts.com/pages/enquiry.html">
+  <meta property="og:title" content="Charter Enquiry | Azure Yachts">
+  <meta property="og:description" content="Begin your bespoke yacht charter enquiry. Our consultants respond within 2 hours.">
+  <meta property="og:url" content="https://azureyachts.com/pages/enquiry.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1200&q=80">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/enquiry.css">
+</head>
+<body>
+
+<!-- Nav + Footer injected by components.js -->
+
+<main>
+
+<!-- =============================================
+     PAGE HERO
+============================================= -->
+<header class="page-hero enquiry-hero">
+  <div class="enquiry-hero-bg" role="img" aria-label="Azure yacht on calm water"></div>
+  <div class="enquiry-hero-content">
+    <span class="page-hero-tag">Private Charter</span>
+    <h1>Begin Your<br><em>Voyage</em></h1>
+    <p class="enquiry-hero-sub">Our consultants respond within two hours</p>
+  </div>
+</header>
+
+<!-- =============================================
+     MAIN FORM SECTION
+============================================= -->
+<section class="enquiry-section" aria-labelledby="enquiry-heading">
+  <div class="enquiry-layout">
+
+    <!-- Sidebar -->
+    <aside class="enquiry-sidebar" aria-label="Why choose Azure">
+      <div class="sidebar-block reveal">
+        <span class="section-tag">Why Azure</span>
+        <h2 id="enquiry-heading" class="section-title" style="font-size:1.8rem; margin-bottom:1rem">Every Enquiry<br><em>Matters</em></h2>
+        <p style="font-size: 0.8rem; line-height: 1.9; color: var(--muted);">Whether you are planning a two-week Mediterranean odyssey or a single sunset cruise, every request receives the same devoted attention from our senior charter consultants.</p>
+      </div>
+
+      <div class="sidebar-promises reveal reveal-delay-1">
+        <div class="promise-item">
+          <div class="promise-icon" aria-hidden="true">&#9201;</div>
+          <div>
+            <div class="promise-title">2-Hour Response</div>
+            <div class="promise-body">Our consultants are available 24 hours a day.</div>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon" aria-hidden="true">&#10003;</div>
+          <div>
+            <div class="promise-title">No Obligation</div>
+            <div class="promise-body">An enquiry is simply a conversation. No commitment required.</div>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon" aria-hidden="true">&#128274;</div>
+          <div>
+            <div class="promise-title">Complete Privacy</div>
+            <div class="promise-body">All enquiries are handled with absolute discretion.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-contact reveal reveal-delay-2">
+        <div class="sidebar-contact-label">Prefer to call?</div>
+        <a href="tel:+377000000000" class="sidebar-contact-tel">+377 000 000 000</a>
+        <a href="mailto:charter@azureyachts.com" class="sidebar-contact-email">charter@azureyachts.com</a>
+      </div>
+
+      <div class="sidebar-vessels reveal reveal-delay-2">
+        <div class="sidebar-contact-label" style="margin-bottom:1.2rem">Featured Vessels</div>
+        <div class="vessel-thumb" onclick="selectVessel('S%C3%A9raphine')">
+          <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=200&q=70" alt="Séraphine superyacht" loading="lazy" width="200" height="70">
+          <div class="vessel-thumb-info">
+            <span class="vessel-thumb-name">Séraphine</span>
+            <span class="vessel-thumb-spec">65m · 12 guests</span>
+          </div>
+        </div>
+        <div class="vessel-thumb" onclick="selectVessel('Elara')">
+          <img src="https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=200&q=70" alt="Elara motor yacht" loading="lazy" width="200" height="70">
+          <div class="vessel-thumb-info">
+            <span class="vessel-thumb-name">Elara</span>
+            <span class="vessel-thumb-spec">42m · 10 guests</span>
+          </div>
+        </div>
+        <div class="vessel-thumb" onclick="selectVessel('Solano')">
+          <img src="https://images.unsplash.com/photo-1544551763-92ab472cad5d?w=200&q=70" alt="Solano sailing yacht" loading="lazy" width="200" height="70">
+          <div class="vessel-thumb-info">
+            <span class="vessel-thumb-name">Solano</span>
+            <span class="vessel-thumb-spec">38m · 8 guests</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Form -->
+    <div class="enquiry-form-wrap reveal">
+      <form id="enquiryForm"
+            action="https://formsubmit.co/charter@azureyachts.com"
+            method="POST"
+            novalidate>
+
+        <!-- FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="New Full Charter Enquiry — Azure Yachts">
+        <input type="hidden" name="_next" value="https://azureyachts.com/pages/thank-you.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="Thank you for your enquiry. An Azure Yachts consultant will be in touch within two hours. We look forward to crafting your voyage.">
+        <!-- Honeypot spam trap -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
+
+        <!-- Step 1: Personal Details -->
+        <fieldset class="form-fieldset" id="step1">
+          <legend class="fieldset-legend">
+            <span class="legend-num">01</span>
+            <span class="legend-title">Your Details</span>
+          </legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eq-first">First Name <abbr title="required">*</abbr></label>
+              <input type="text" id="eq-first" name="first_name" placeholder="Alexander" required autocomplete="given-name">
+              <span class="form-error" role="alert">Please enter your first name</span>
+            </div>
+            <div class="form-group">
+              <label for="eq-last">Last Name <abbr title="required">*</abbr></label>
+              <input type="text" id="eq-last" name="last_name" placeholder="Harrington" required autocomplete="family-name">
+              <span class="form-error" role="alert">Please enter your last name</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eq-email">Email Address <abbr title="required">*</abbr></label>
+              <input type="email" id="eq-email" name="email" placeholder="a.harrington@email.com" required autocomplete="email">
+              <span class="form-error" role="alert">Please enter a valid email address</span>
+            </div>
+            <div class="form-group">
+              <label for="eq-tel">Telephone</label>
+              <input type="tel" id="eq-tel" name="telephone" placeholder="+44 000 0000 0000" autocomplete="tel">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eq-nationality">Nationality</label>
+              <input type="text" id="eq-nationality" name="nationality" placeholder="British" autocomplete="country-name">
+            </div>
+            <div class="form-group">
+              <label for="eq-how">How did you hear about us?</label>
+              <select id="eq-how" name="referral_source">
+                <option value="">Select…</option>
+                <option>Returning client</option>
+                <option>Client referral</option>
+                <option>Google / search</option>
+                <option>Social media</option>
+                <option>Press / magazine</option>
+                <option>Broker</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 2: Voyage Details -->
+        <fieldset class="form-fieldset" id="step2">
+          <legend class="fieldset-legend">
+            <span class="legend-num">02</span>
+            <span class="legend-title">Voyage Details</span>
+          </legend>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eq-vessel">Preferred Vessel</label>
+              <select id="eq-vessel" name="preferred_vessel">
+                <option value="">Any / Advise me</option>
+                <option value="Séraphine">Séraphine — 65m Superyacht</option>
+                <option value="Elara">Elara — 42m Motor Yacht</option>
+                <option value="Solano">Solano — 38m Classic Sail</option>
+                <option value="Any">I'd like a recommendation</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="eq-guests">Number of Guests <abbr title="required">*</abbr></label>
+              <select id="eq-guests" name="guests" required>
+                <option value="">Select…</option>
+                <option>2</option>
+                <option>3–4</option>
+                <option>5–6</option>
+                <option>7–8</option>
+                <option>9–10</option>
+                <option>11–12</option>
+              </select>
+              <span class="form-error" role="alert">Please select party size</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eq-dest">Preferred Destination</label>
+              <select id="eq-dest" name="destination">
+                <option value="">Select or describe below</option>
+                <option>French Riviera</option>
+                <option>Greek Islands</option>
+                <option>Amalfi Coast</option>
+                <option>Corsica &amp; Sardinia</option>
+                <option>Croatia &amp; Adriatic</option>
+                <option>Maldives</option>
+                <option>Caribbean — BVI</option>
+                <option>Caribbean — St Barts / Antigua</option>
+                <option>Norway Fjords</option>
+                <option>Seychelles</option>
+                <option>New England</option>
+                <option>Pacific — French Polynesia</option>
+                <option>Bespoke / Advise me</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="eq-duration">Charter Duration</label>
+              <select id="eq-duration" name="duration">
+                <option value="">Select…</option>
+                <option>Day charter</option>
+                <option>Weekend (2–3 days)</option>
+                <option>1 week</option>
+                <option>2 weeks</option>
+                <option>3–4 weeks</option>
+                <option>Extended (1+ months)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eq-from">Preferred Start Date</label>
+              <input type="date" id="eq-from" name="start_date">
+            </div>
+            <div class="form-group">
+              <label for="eq-to">Preferred End Date</label>
+              <input type="date" id="eq-to" name="end_date">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eq-budget">Indicative Budget</label>
+              <select id="eq-budget" name="budget">
+                <option value="">Prefer not to say</option>
+                <option>€50,000 – €100,000</option>
+                <option>€100,000 – €250,000</option>
+                <option>€250,000 – €500,000</option>
+                <option>€500,000+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="eq-type">Charter Type</label>
+              <select id="eq-type" name="charter_type">
+                <option>Private leisure</option>
+                <option>Corporate / incentive</option>
+                <option>Special occasion</option>
+                <option>Honeymoon</option>
+                <option>Family</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 3: Additional Information -->
+        <fieldset class="form-fieldset" id="step3">
+          <legend class="fieldset-legend">
+            <span class="legend-num">03</span>
+            <span class="legend-title">Your Vision</span>
+          </legend>
+          <div class="form-row">
+            <div class="form-group form-full">
+              <label for="eq-vision">Describe your ideal voyage</label>
+              <textarea id="eq-vision" name="vision" rows="5" placeholder="Tell us about your dream voyage — occasions you're celebrating, activities you enjoy, places you'd like to visit, dietary preferences, or any special requests…"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-full">
+              <label for="eq-special">Special Requirements or Accessibility Needs</label>
+              <textarea id="eq-special" name="special_requirements" rows="3" placeholder="Any dietary, medical, or accessibility requirements we should be aware of…"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-full">
+              <label class="checkbox-label">
+                <input type="checkbox" name="newsletter" value="yes" id="eq-newsletter">
+                <span class="checkbox-custom" aria-hidden="true"></span>
+                <span>I would like to receive occasional updates about new vessels and destinations</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-full">
+              <label class="checkbox-label">
+                <input type="checkbox" name="privacy_agreed" value="yes" id="eq-privacy" required>
+                <span class="checkbox-custom" aria-hidden="true"></span>
+                <span>I have read and agree to the <a href="privacy.html" style="color: var(--gold);">Privacy Policy</a> <abbr title="required">*</abbr></span>
+              </label>
+              <span class="form-error" role="alert">You must agree to the privacy policy</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary btn-submit" id="enquirySubmitBtn">
+            Submit Charter Enquiry
+          </button>
+          <p class="form-note">Your information is held in strict confidence and never shared with third parties.</p>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- Scripts -->
+<script src="../js/components.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/enquiry.js"></script>
+</body>
+</html>

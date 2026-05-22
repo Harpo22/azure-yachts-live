@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | Azure Yachts</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .notfound {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem; position: relative; overflow: hidden;
+    }
+    .notfound-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(rgba(6,9,16,0.85), rgba(6,9,16,0.85)),
+        url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1400&q=80') center/cover;
+    }
+    .notfound-content { position: relative; z-index: 1; }
+    .notfound-num {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(8rem, 20vw, 16rem);
+      font-weight: 300; color: rgba(201,169,110,0.15); line-height: 1; display: block;
+    }
+    .notfound-title {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300; color: var(--white); margin: -2rem 0 1.5rem;
+    }
+    .notfound-title em { font-style: italic; color: var(--gold-light); }
+    .notfound-body { font-size: 0.8rem; line-height: 1.9; color: var(--muted); margin: 0 auto 3rem; max-width: 400px; }
+    .notfound-actions { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<main class="notfound">
+  <div class="notfound-bg" role="img" aria-label="Yacht at sea"></div>
+  <div class="notfound-content">
+    <span class="notfound-num" aria-hidden="true">404</span>
+    <h1 class="notfound-title">Lost at <em>Sea</em></h1>
+    <p class="notfound-body">The page you were looking for seems to have sailed beyond the horizon. Let us guide you back.</p>
+    <div class="notfound-actions">
+      <a href="index.html" class="btn-primary">Return Home</a>
+      <a href="pages/enquiry.html" class="btn-ghost">Charter Enquiry</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
