@@ -328,3 +328,116 @@ footer {
   .form-row { grid-template-columns: 1fr; }
   .btn-primary { padding: 0.9rem 2rem; font-size: 0.65rem; }
 }
+
+/* =============================================
+   FLEET NAV DROPDOWN
+   ============================================= */
+
+/* Container */
+.nav-item-fleet { position: relative; }
+
+.nav-fleet-trigger { display: flex !important; align-items: center; gap: 0.4rem; }
+
+.nav-chevron {
+  font-size: 0.85rem; display: inline-block;
+  transition: transform 0.25s ease; line-height: 1; margin-top: 1px;
+}
+.nav-item-fleet.is-open .nav-chevron { transform: rotate(180deg); }
+
+/* Panel — HIDDEN BY DEFAULT using visibility (keeps it out of paint but off-interactive) */
+.nav-dropdown {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: calc(100% + 1.4rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  width: 520px;
+  z-index: 300;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
+}
+/* Opened by JS adding .is-open on the parent <li> */
+.nav-item-fleet.is-open .nav-dropdown {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0s;
+}
+/* Invisible hover bridge — fills the gap between trigger and panel */
+.nav-dropdown::before {
+  content: ''; display: block; height: 1.4rem;
+  position: absolute; top: -1.4rem; left: 0; right: 0;
+}
+.nav-dropdown-inner {
+  background: rgba(6,9,16,0.97);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+}
+.nav-dropdown-vessel {
+  display: flex; flex-direction: column; text-decoration: none;
+  padding: 1rem; gap: 0.8rem;
+  border: 1px solid transparent;
+  background: rgba(6,9,16,0.97);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.nav-dropdown-vessel:hover {
+  border-color: var(--border);
+  background: rgba(201,169,110,0.06);
+}
+.ndv-img { width: 100%; height: 80px; background-size: cover; background-position: center; }
+.ndv-info { display: flex; flex-direction: column; gap: 0.2rem; }
+.ndv-type {
+  font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold-dark); font-weight: 400;
+}
+.ndv-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+  font-weight: 300; color: var(--white);
+}
+.ndv-spec { font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); }
+.nav-dropdown-footer {
+  grid-column: 1 / -1; padding: 1rem 0 0;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end;
+}
+.nav-dropdown-all {
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none; font-weight: 400;
+  transition: color 0.25s;
+}
+.nav-dropdown-all:hover { color: var(--gold-light); }
+
+/* ---- Mobile fleet sub-menu ---- */
+.nav-mobile-fleet-toggle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 300; color: var(--white);
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; gap: 0.5rem;
+  transition: color 0.3s ease; padding: 0;
+}
+.nav-mobile-fleet-toggle:hover { color: var(--gold-light); }
+.nav-mobile-chevron {
+  font-size: 1.4rem; display: inline-block; transition: transform 0.25s ease;
+}
+.nav-mobile-fleet-toggle[aria-expanded="true"] .nav-mobile-chevron {
+  transform: rotate(180deg);
+}
+.nav-mobile-fleet-sub {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.8rem; overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+.nav-mobile-fleet-sub.open { max-height: 400px; }
+.nav-mobile-fleet-sub a {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.75rem !important; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted) !important;
+  transition: color 0.3s;
+}
+.nav-mobile-fleet-sub a:hover { color: var(--gold) !important; }

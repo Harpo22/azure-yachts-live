@@ -141,3 +141,91 @@
   };
 
 })();
+
+/* =============================================
+   FLEET NAV DROPDOWN
+   — appended separately so it runs after DOM inject
+   ============================================= */
+document.addEventListener('DOMContentLoaded', function () {
+
+  const fleetItem    = document.getElementById('navFleetItem');
+  const fleetTrigger = document.getElementById('navFleetTrigger');
+  const fleetDrop    = document.getElementById('navFleetDropdown');
+
+  if (!fleetItem || !fleetTrigger || !fleetDrop) return;
+
+  let closeTimer = null;
+
+  /* ---- helpers ---- */
+  function openDropdown() {
+    clearTimeout(closeTimer);
+    fleetItem.classList.add('is-open');
+    fleetTrigger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDropdown() {
+    fleetItem.classList.remove('is-open');
+    fleetTrigger.setAttribute('aria-expanded', 'false');
+  }
+
+  function scheduleClose() {
+    closeTimer = setTimeout(closeDropdown, 120);
+  }
+
+  /* ---- Desktop: hover on <li> (covers both trigger AND panel) ---- */
+  fleetItem.addEventListener('mouseenter', openDropdown);
+  fleetItem.addEventListener('mouseleave', scheduleClose);
+
+  /* If mouse re-enters the item/panel before timer fires, cancel close */
+  fleetItem.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+
+  /* ---- Click/keyboard toggle (for keyboard users & touch) ---- */
+  fleetTrigger.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (fleetItem.classList.contains('is-open')) {
+      closeDropdown();
+    } else {
+      openDropdown();
+    }
+  });
+
+  fleetTrigger.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fleetItem.classList.contains('is-open') ? closeDropdown() : openDropdown();
+    }
+    if (e.key === 'Escape') closeDropdown();
+  });
+
+  /* ---- Close on Escape anywhere ---- */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && fleetItem.classList.contains('is-open')) {
+      closeDropdown();
+      fleetTrigger.focus();
+    }
+  });
+
+  /* ---- Close when clicking outside the dropdown ---- */
+  document.addEventListener('click', function (e) {
+    if (!fleetItem.contains(e.target)) closeDropdown();
+  });
+
+  /* ---- Close when any OTHER nav link is clicked ---- */
+  document.querySelectorAll('.nav-links a:not(.nav-fleet-trigger), .nav-links .nav-cta').forEach(function (a) {
+    a.addEventListener('click', closeDropdown);
+  });
+
+  /* ---- Mobile fleet sub-menu ---- */
+  const mobileToggle = document.getElementById('navMobileFleetToggle');
+  const mobileSub    = document.getElementById('navMobileFleetSub');
+
+  if (mobileToggle && mobileSub) {
+    mobileToggle.addEventListener('click', function () {
+      const open = !mobileSub.classList.contains('open');
+      mobileSub.classList.toggle('open', open);
+      mobileToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mobileSub.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+  }
+
+});
