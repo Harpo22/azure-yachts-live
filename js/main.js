@@ -100,10 +100,9 @@
 
   /* ------------------------------------------
      Desktop Fleet dropdown
-     ----------------------------------------
-     Rule: .nav-dropdown is HIDDEN by CSS default.
-     Only class "is-open" on #navFleetItem makes it visible.
-     We never force-show it; we only add/remove is-open.
+     Two-step open: display:block first, then .is-visible for fade.
+     Two-step close: remove .is-visible, wait for transition, remove display.
+     Hard reset runs immediately so dropdown is NEVER visible on load.
   ------------------------------------------ */
   var fleetItem    = document.getElementById('navFleetItem');
   var fleetTrigger = document.getElementById('navFleetTrigger');
@@ -111,17 +110,45 @@
 
   if (fleetItem && fleetTrigger && fleetDrop) {
 
-    var closeTimer = null;
+    var closeTimer  = null;
+    var openRaf     = null;
+
+    /* Hard reset — called immediately, before any event wiring */
+    function hardClose() {
+      clearTimeout(closeTimer);
+      cancelAnimationFrame(openRaf);
+      fleetDrop.classList.remove('is-visible');
+      fleetItem.classList.remove('is-open');
+      fleetTrigger.setAttribute('aria-expanded', 'false');
+      fleetDrop.setAttribute('aria-hidden', 'true');
+      /* Force display:none immediately via inline style in case
+         a transition is mid-flight */
+      fleetDrop.style.display = 'none';
+    }
+
+    /* Run hard close RIGHT NOW — before any hover or click can fire */
+    hardClose();
 
     function openFleet() {
       clearTimeout(closeTimer);
+      /* Remove inline display:none so the CSS class can take over */
+      fleetDrop.style.display = '';
       fleetItem.classList.add('is-open');
       fleetTrigger.setAttribute('aria-expanded', 'true');
       fleetDrop.setAttribute('aria-hidden', 'false');
+      /* One rAF tick later: add .is-visible to trigger the CSS fade */
+      cancelAnimationFrame(openRaf);
+      openRaf = requestAnimationFrame(function () {
+        openRaf = requestAnimationFrame(function () {
+          fleetDrop.classList.add('is-visible');
+        });
+      });
     }
 
     function closeFleet() {
       clearTimeout(closeTimer);
+      cancelAnimationFrame(openRaf);
+      fleetDrop.classList.remove('is-visible');
       fleetItem.classList.remove('is-open');
       fleetTrigger.setAttribute('aria-expanded', 'false');
       fleetDrop.setAttribute('aria-hidden', 'true');
@@ -132,15 +159,13 @@
       closeTimer = setTimeout(closeFleet, 150);
     }
 
-    /* Hover — attached to the whole <li> so moving into the panel
-       doesn't trigger a close (the panel is inside the <li>) */
+    /* Hover on the <li> — panel is inside <li> so no gap-close issue */
     fleetItem.addEventListener('mouseenter', openFleet);
     fleetItem.addEventListener('mouseleave', scheduleClose);
 
-    /* Click toggle — button press opens/closes */
+    /* Click toggle on the button trigger */
     fleetTrigger.addEventListener('click', function (e) {
-      /* Stop the document click listener below from immediately closing it */
-      e.stopPropagation();
+      e.stopPropagation(); /* prevent document click closing immediately */
       if (fleetItem.classList.contains('is-open')) {
         closeFleet();
       } else {
@@ -148,12 +173,12 @@
       }
     });
 
-    /* Clicks inside the dropdown panel should NOT close it */
+    /* Clicks inside the panel don't bubble to document close handler */
     fleetDrop.addEventListener('click', function (e) {
       e.stopPropagation();
     });
 
-    /* Clicking anywhere outside closes it */
+    /* Click outside closes */
     document.addEventListener('click', function () {
       if (fleetItem.classList.contains('is-open')) {
         closeFleet();
@@ -168,7 +193,7 @@
       }
     });
 
-    /* Clicking any other nav link closes the dropdown */
+    /* Any other nav link click closes the dropdown */
     document.querySelectorAll('.nav-links a').forEach(function (a) {
       a.addEventListener('click', closeFleet);
     });

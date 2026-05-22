@@ -116,98 +116,71 @@ nav.scrolled {
 
 /* =============================================
    FLEET DROPDOWN
-   All state controlled exclusively by JS adding/removing
-   .is-open on #navFleetItem. No CSS-only open state.
    ============================================= */
 
-/* Wrapper — needs position:relative so the panel positions against it */
 .nav-item-fleet {
   position: relative;
   list-style: none;
 }
 
-/* Trigger — flex so chevron aligns */
 .nav-fleet-trigger {
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-/* Animated chevron */
 .nav-chevron {
   display: inline-block;
   font-size: 0.75rem;
   line-height: 1;
   margin-top: 1px;
-  transition: transform 0.25s ease;
-  /* Unicode down-chevron is wide; nudge it visually */
+  transition: transform 0.22s ease;
   transform: scaleX(1.4);
 }
 .nav-item-fleet.is-open .nav-chevron {
   transform: scaleX(1.4) rotate(180deg);
 }
 
-/* ---- THE PANEL ---- */
 /*
-   DEFAULT STATE: completely hidden and non-interactive.
-   - visibility:hidden removes it from tab order and hit-testing
-   - opacity:0 makes it transparent
-   - pointer-events:none double-ensures no accidental interaction
-   - The visibility transition delay (0.22s when closing) lets opacity
-     animate to 0 before the element is pulled from layout.
-   We intentionally do NOT use display:none so CSS transitions work.
+  DROPDOWN PANEL — display:none is the true ground state.
+  No visibility trick, no transition ambiguity on page load.
+  JS exclusively controls open/close via .is-open and .is-visible.
+  No CSS pseudo-class (:hover, :focus, :focus-within) opens this panel.
 */
 .nav-dropdown {
-  /* === HIDDEN BY DEFAULT === */
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-
-  /* Position */
+  display: none;          /* HARD HIDDEN — no paint, no layout, no flicker */
   position: absolute;
-  top: calc(100% + 1.2rem); /* gap below trigger */
+  top: calc(100% + 1.2rem);
   left: 50%;
-  transform: translateX(-50%) translateY(-6px);
   width: 540px;
   z-index: 500;
-
-  /* Transitions */
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease,
-    visibility 0s linear 0.22s; /* delay visibility so opacity fades first */
+  transform: translateX(-50%) translateY(-6px);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
 }
 
-/*
-   OPEN STATE: only when JS adds .is-open to the parent <li>.
-   No other selector should make this visible.
-*/
+/* Step 1: JS adds .is-open → display:block (still transparent) */
 .nav-item-fleet.is-open > .nav-dropdown {
-  visibility: visible;
-  opacity: 1;
+  display: block;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
-  transition:
-    opacity 0.22s ease,
-    transform 0.22s ease,
-    visibility 0s linear 0s; /* no delay when opening */
 }
 
-/*
-   Invisible hover-bridge: fills the vertical gap between the
-   trigger bottom and the panel top so moving the mouse into
-   the gap doesn't fire mouseleave on the <li>.
-*/
+/* Step 2: JS adds .is-visible one rAF later → fade + slide in */
+.nav-item-fleet.is-open > .nav-dropdown.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Hover-bridge fills gap between trigger and panel */
 .nav-dropdown::before {
   content: '';
   position: absolute;
   top: -1.2rem;
   left: 0; right: 0;
   height: 1.2rem;
-  /* transparent — just captures pointer events */
 }
 
-/* Panel inner */
 .nav-dropdown-inner {
   background: rgba(6,9,16,0.98);
   border: 1px solid var(--border);
@@ -219,7 +192,6 @@ nav.scrolled {
   gap: 0;
 }
 
-/* Vessel card */
 .nav-dropdown-vessel {
   display: flex;
   flex-direction: column;
@@ -254,7 +226,6 @@ nav.scrolled {
   font-size: 0.6rem; letter-spacing: 0.08em; color: var(--muted);
 }
 
-/* "View all" footer row */
 .nav-dropdown-footer {
   grid-column: 1 / -1;
   padding: 0.75rem 1rem 0;
